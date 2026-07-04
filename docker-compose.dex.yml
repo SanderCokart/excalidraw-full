@@ -10,6 +10,7 @@ services:
     image: dexidp/dex:v2.38.0
     container_name: excalidraw-dex
     restart: unless-stopped
+    tty: true
     volumes:
       - ./config/dex.config.yaml:/etc/dex/config.yaml
     environment:

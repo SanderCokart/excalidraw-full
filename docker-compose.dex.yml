@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   netpod:
     image: busybox:latest
@@ -7,8 +5,6 @@ services:
       - "5556:5556"  # Dex
       - "3002:3002"  # Excalidraw
     command: ["sleep", "infinity"]
-    networks:
-      - excalidraw-network
 
   dex:
     image: dexidp/dex:v2.38.0
@@ -32,7 +28,6 @@ services:
       timeout: 1s
       retries: 10
       start_period: 10s
-    network_mode: service:netpod
 
   excalidraw:
     image: ghcr.io/betterandbetterii/excalidraw-full:latest
@@ -43,8 +38,3 @@ services:
     depends_on:
       dex:
         condition: service_healthy
-    network_mode: service:netpod
-
-networks:
-  excalidraw-network:
-    driver: bridge

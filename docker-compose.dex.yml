@@ -1,16 +1,11 @@
 services:
-  netpod:
-    image: busybox:latest
-    ports:
-      - "5556:5556"  # Dex
-      - "3002:3002"  # Excalidraw
-    command: ["sleep", "infinity"]
-
   dex:
     image: dexidp/dex:v2.38.0
     container_name: excalidraw-dex
     restart: unless-stopped
     tty: true
+    ports:
+      - "5556:5556"
     volumes:
       - ./config/dex.config.yaml:/etc/dex/config.yaml
     environment:
@@ -32,9 +27,10 @@ services:
 
   excalidraw:
     image: ghcr.io/betterandbetterii/excalidraw-full:latest
+    ports:
+      - "3002:3002"
     volumes:
       - ./data:/root/data
-      - ./excalidraw.db:/root/excalidraw.db:Z
       - ./.env:/root/.env
     depends_on:
       dex:

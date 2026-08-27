@@ -10,7 +10,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: excalidraw-full
-  OWNER: sandercokart
+  OWNER: betterandbetterii
 
 jobs:
   build-and-push:

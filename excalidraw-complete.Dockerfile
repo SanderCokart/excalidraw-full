@@ -3,7 +3,6 @@ FROM --platform=$BUILDPLATFORM node:18 AS frontend-builder
 WORKDIR /app
 # 复制 excalidraw 子模块
 COPY excalidraw/ ./excalidraw/
-COPY patches/time.ts ./excalidraw/excalidraw-app/utils/time.ts
 # 构建前端
 RUN cd excalidraw && npm install -g pnpm && pnpm install && cd excalidraw-app && DISABLE_VITE_CHECKER=true pnpm build:app:docker
 

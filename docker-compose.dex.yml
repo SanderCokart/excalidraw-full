@@ -26,10 +26,7 @@ services:
       start_period: 10s
 
   excalidraw:
-    build:
-      context: .
-      dockerfile: excalidraw-complete.Dockerfile
-    image: excalidraw-full:local
+    image: ghcr.io/betterandbetterii/excalidraw-full:latest
     restart: unless-stopped
     ports:
       - "3002:3002"

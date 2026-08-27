@@ -27,14 +27,20 @@ services:
 
   excalidraw:
     image: ghcr.io/betterandbetterii/excalidraw-full:latest
+    restart: unless-stopped
     ports:
       - "3002:3002"
     volumes:
-      - ./data:/root/data
+      - excalidraw-data:/root/data
       - ./.env:/root/.env
     environment:
       - OIDC_ISSUER_URL=https://auth.sandercokart.com
       - OIDC_REDIRECT_URL=https://draw.sandercokart.com/auth/callback
+      - STORAGE_TYPE=sqlite
+      - DATA_SOURCE_NAME=/root/data/excalidraw.db
     depends_on:
       dex:
         condition: service_healthy
+
+volumes:
+  excalidraw-data:

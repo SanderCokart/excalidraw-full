@@ -7,7 +7,7 @@ WORKDIR /app
 # populate the git submodule, so do not COPY excalidraw/ from build context.
 RUN git clone --depth 1 --branch multi-canvas https://github.com/BetterAndBetterII/excalidraw.git excalidraw
 COPY patches/time.ts ./excalidraw/excalidraw-app/utils/time.ts
-RUN cd excalidraw && npm install -g pnpm && pnpm install && cd excalidraw-app && DISABLE_VITE_CHECKER=true pnpm build:app:docker
+RUN cd excalidraw && npm install -g pnpm@9.15.9 && pnpm install && cd excalidraw-app && DISABLE_VITE_CHECKER=true pnpm build:app:docker
 
 # Backend build
 FROM golang:alpine AS backend-builder
